@@ -1,9 +1,8 @@
 // src/pages/_app.tsx
 import { withTRPC } from "@trpc/next";
-import type { AppRouter } from "../server/router";
 import type { AppType } from "next/dist/shared/lib/utils";
-import superjson from "superjson";
-import "../styles/globals.css";
+import "@/styles/globals.css";
+import type { AppRouter } from '@/backend/router';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;
@@ -29,7 +28,6 @@ export default withTRPC<AppRouter>({
 
     return {
       url,
-      transformer: superjson,
       /**
        * @link https://react-query.tanstack.com/reference/QueryClient
        */
