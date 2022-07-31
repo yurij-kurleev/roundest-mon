@@ -14,4 +14,8 @@ function defineNextConfig(config) {
 
 export default defineNextConfig({
   reactStrictMode: true,
+  images: {
+    loader: "default",
+    domains: ["raw.githubusercontent.com"],
+  }
 });

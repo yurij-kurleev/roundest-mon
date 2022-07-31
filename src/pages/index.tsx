@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { getOptionsForVote } from '@/backend/utils/getRandomPokemon';
 import { trpc } from '@/backend/utils/trpc';
 import { inferQueryResponse } from '@/pages/api/trpc/[trpc]';
 
-const btn = 'inline-flex items-center px-2.5 py-1.5 border border-gray300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500';
+const btn = 'inline-flex items-center px-2.5 py-1.5 border border-gray300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-2';
 
 export default function Home() {
   const [ids, updateIds] = useState(() => getOptionsForVote());
@@ -58,10 +59,12 @@ type PokemonFromServer = inferQueryResponse<"get-pokemon-by-id">;
 const PokemonListing: React.FC<{ pokemon: PokemonFromServer, vote: () => void }> = ({ pokemon, vote }) => {
   return (
     <div className="flex flex-col items-center">
-      <img
+      <Image
         src={pokemon.sprites.front_default!}
         alt="First Pokemon"
-        className="w-64 h-64"
+        width={256}
+        height={256}
+        layout="fixed"
       />
       <div className="text-xl text-center capitalize mt-[-2rem]">{pokemon.name}</div>
       <button onClick={() => vote()} className={btn}>Rounder</button>
